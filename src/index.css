@@ -1,0 +1,253 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f7f7f7;
+  color: #222;
+
+}
+
+.about p {
+  text-align: justify;
+  line-height: 1.6;
+  margin: 0 auto;
+  font-size: 20px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.hero, .about {
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  background: #fff;
+}
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #353639;
+}
+
+nav a {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #276234;
+}
+
+
+.hero {
+  display: flex;
+  justify-content: center;
+  padding: 6rem 2rem;
+  position: relative;
+  color: white;
+
+  max-width: 1200px;   
+  margin: 2rem auto;   
+  border-radius: 20px; 
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  background-image: url('/assets/ambot.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.2); 
+  border-radius: 20px; 
+  z-index: 0;
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+
+.hero-image {
+  flex: 0 0 250px;
+}
+
+.hero-image img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #276234;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 600px;
+  margin: 0;
+  text-align: left;
+}
+
+.hero-text h2 {
+  margin: 0;
+  line-height: 1.2;
+  font-size: 2.2rem;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+}
+
+.about {
+  color: #333;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.projects, .tour, .journal, .contact {
+  background: none; 
+  border-radius: 0;
+  box-shadow: none;
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.gallery-item {
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  background: #fefefe;
+  position: relative;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+}
+
+
+.contact-box {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  background: none; 
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.contact-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.contact-column {
+  flex: 1;
+  min-width: 250px;
+  font-size: 20px;
+}
+.contact h2 {
+margin-top: 5rem;     
+  margin-bottom: 1.5rem; 
+  font-size: 1.5rem; 
+}
+.contact-column:not(.socials) {
+  text-align: left;
+}
+
+.contact-column.socials {
+  text-align: center;
+}
+
+.socials-row {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.socials-row a {
+  color: black;
+  font-size: 1.8rem;
+  transition: transform 0.2s;
+}
+
+.socials-row a:hover {
+  transform: scale(1.2);
+  color: #ffdd57;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(90deg, #111, #333);
+  color: white;
+  margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-image img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .hero-text {
+    max-width: 100%;
+  }
+
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .contact-row {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+}
+
