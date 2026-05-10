@@ -1,78 +1,115 @@
+/* ─────────────────────────────────────────
+   BASE
+───────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background: #f7f7f7;
-  color: #222;
-
+  /* FIX #6 — body text contrast: was #222, keeping dark for readability */
+  color: #1a1a1a;
+  line-height: 1.7;
 }
 
-.about p {
-  text-align: justify;
-  line-height: 1.6;
-  margin: 0 auto;
-  font-size: 20px;
-}
-
+/* ─────────────────────────────────────────
+   NAVBAR  (FIX #1 — logo filled in, active state, Hire Me CTA)
+───────────────────────────────────────── */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 100;
 }
-.hero, .about {
-  border-radius: 20px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-  background: #fff;
-}
+
 .logo {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #353639;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.logo-accent {
+  color: #276234;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
 }
 
 nav a {
-  margin-left: 1rem;
+  margin-left: 0.75rem;
   text-decoration: none;
-  color: #444;
+  /* FIX #6 — was #444, now #333 for better contrast */
+  color: #333;
   font-weight: 500;
-  transition: color 0.3s;
+  font-size: 0.95rem;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
 }
 
 nav a:hover {
   color: #276234;
+  background: #f0f7f1;
 }
 
+/* FIX #1 — active nav link highlight */
+nav a.nav-active {
+  color: #276234;
+  font-weight: 700;
+  border-bottom: 2px solid #276234;
+}
 
+/* FIX #2 — Hire Me CTA in navbar */
+nav a.nav-cta {
+  margin-left: 1rem;
+  background: #276234;
+  color: #fff !important;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.15s;
+}
+
+nav a.nav-cta:hover {
+  background: #1e4f28;
+  transform: translateY(-1px);
+  color: #fff;
+}
+
+/* ─────────────────────────────────────────
+   HERO  (FIX #2 — added CTA buttons, fixed broken maxHeight)
+───────────────────────────────────────── */
 .hero {
   display: flex;
   justify-content: center;
   padding: 6rem 2rem;
   position: relative;
   color: white;
-
-  max-width: 1200px;   
-  margin: 2rem auto;   
-  border-radius: 20px; 
-  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-  background-image: url('/assets/ambot.jpg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  max-width: 1200px;
+  margin: 2rem auto;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  min-height: 380px;
 }
 
 .hero::before {
   content: "";
   position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.2); 
-  border-radius: 20px; 
+  inset: 0;
+  background: rgba(0, 0, 0, 0.30);
+  border-radius: 20px;
   z-index: 0;
 }
 
@@ -85,17 +122,18 @@ nav a:hover {
   z-index: 1;
 }
 
-
 .hero-image {
-  flex: 0 0 250px;
+  flex: 0 0 220px;
 }
 
 .hero-image img {
-  width: 250px;
-  height: 250px;
+  width: 220px;
+  height: 220px;
   object-fit: cover;
   border-radius: 50%;
   border: 4px solid #276234;
+  /* FIX #3 — subtle shadow so profile pic pops */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35);
 }
 
 .hero-text {
@@ -103,38 +141,168 @@ nav a:hover {
   flex-direction: column;
   justify-content: center;
   max-width: 600px;
-  margin: 0;
-  text-align: left;
 }
 
 .hero-text h2 {
-  margin: 0;
-  line-height: 1.2;
+  margin: 0 0 0.5rem;
+  /* FIX #3 — consistent heading size */
   font-size: 2.2rem;
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+  line-height: 1.25;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
 }
 
+.highlight {
+  color: #a8d5b5;
+}
+
+/* FIX #2 — hero subtitle text */
+.hero-sub {
+  margin: 0 0 1.5rem;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.03em;
+}
+
+/* FIX #2 — CTA button row */
+.hero-cta-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 0.65rem 1.5rem;
+  background: #276234;
+  color: #fff;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.2s, transform 0.15s;
+  box-shadow: 0 4px 14px rgba(39,98,52,0.4);
+}
+
+.btn-primary:hover {
+  background: #1e4f28;
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  display: inline-block;
+  padding: 0.65rem 1.5rem;
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.8);
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+.btn-outline:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ─────────────────────────────────────────
+   SHARED OVERLAY HELPER
+───────────────────────────────────────── */
+.section-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.72);
+  z-index: 0;
+}
+
+.section-overlay.dark {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* ─────────────────────────────────────────
+   ABOUT  (FIX #3, #6 — contrast + spacing)
+───────────────────────────────────────── */
 .about {
-  color: #333;
+  color: #222;
   border-radius: 20px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
   padding: 4rem 2rem;
   max-width: 1200px;
-  margin: auto;
+  margin: 2rem auto;
 }
 
+.about h2 {
+  /* FIX #3 — consistent H2 size across all sections */
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+.about p {
+  text-align: justify;
+  line-height: 1.8;
+  margin: 0 auto;
+  /* FIX #6 — was potentially low contrast, now explicitly #333 */
+  color: #333;
+  font-size: 1.05rem;
+  max-width: 800px;
+}
+
+/* ─────────────────────────────────────────
+   SECTION HEADINGS — consistent (FIX #3)
+───────────────────────────────────────── */
+.tour h2,
+.journal h2,
+.projects h2,
+.contact h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #1a1a1a;
+}
+
+.projects h2 {
+  color: #fff;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+}
+
+/* FIX #5 — section tag above contact heading */
+.section-tag {
+  display: inline-block;
+  background: #276234;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 0.75rem;
+}
+
+.contact-heading {
+  font-size: 2rem;
+  margin-top: 0.25rem;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+}
+
+/* ─────────────────────────────────────────
+   TOUR / JOURNAL / PROJECTS / CONTACT
+───────────────────────────────────────── */
 .projects, .tour, .journal, .contact {
-  background: none; 
-  border-radius: 0;
-  box-shadow: none;
   padding: 4rem 2rem;
   max-width: 1200px;
-  margin: auto;
+  margin: 2rem auto;
 }
 
+/* ─────────────────────────────────────────
+   GALLERY
+───────────────────────────────────────── */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
   margin-top: 2rem;
 }
@@ -142,31 +310,84 @@ nav a:hover {
 .gallery-item {
   border-radius: 15px;
   overflow: hidden;
-  transition: transform 0.3s, box-shadow 0.3s;
   background: #fefefe;
   position: relative;
+  /* FIX #4 — transition for hover state */
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border 0.25s ease;
+  border: 2px solid transparent;
 }
 
 .gallery-item img {
   width: 100%;
-  height: 350px;
+  height: 220px;
   object-fit: cover;
   display: block;
 }
 
-.gallery-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+.gallery-item p {
+  padding: 0.75rem 1rem 0.5rem;
+  /* FIX #6 — was potentially too light, now #333 */
+  color: #333;
+  font-size: 0.95rem;
+  margin: 0;
 }
 
+.gallery-item small {
+  display: block;
+  padding: 0 1rem 0.75rem;
+  color: #777;
+  font-size: 0.82rem;
+}
 
+/* FIX #4 — gallery hover state (all sections) */
+.gallery-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* FIX #4 — project cards get extra visual affordance (clickable) */
+.project-card {
+  cursor: pointer;
+}
+
+.project-card:hover {
+  border: 2px solid #276234;
+  box-shadow: 0 16px 30px rgba(39, 98, 52, 0.2);
+}
+
+.project-card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.project-card img {
+  height: 200px;
+}
+
+/* FIX #4 — "View Project →" label appears on hover */
+.view-project-label {
+  display: block;
+  padding: 0 1rem 0.85rem;
+  color: #276234;
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.project-card:hover .view-project-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─────────────────────────────────────────
+   CONTACT  (FIX #5 — prominent, easy to find)
+───────────────────────────────────────── */
 .contact-box {
-  padding: 2rem;
+  padding: 1rem 0;
   max-width: 800px;
-  margin: 0 auto;
-  background: none; 
-  border-radius: 0;
-  box-shadow: none;
 }
 
 .contact-row {
@@ -179,16 +400,23 @@ nav a:hover {
 
 .contact-column {
   flex: 1;
-  min-width: 250px;
-  font-size: 20px;
+  min-width: 220px;
 }
-.contact h2 {
-margin-top: 5rem;     
-  margin-bottom: 1.5rem; 
-  font-size: 1.5rem; 
+
+.contact-label {
+  font-size: 1rem;
+  font-weight: 700;
+  /* FIX #6 — was potentially too light */
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
 }
-.contact-column:not(.socials) {
-  text-align: left;
+
+.contact-text {
+  /* FIX #6 — explicit dark color for readability */
+  color: #333;
+  font-size: 1rem;
+  margin: 0.4rem 0;
+  line-height: 1.6;
 }
 
 .contact-column.socials {
@@ -203,40 +431,83 @@ margin-top: 5rem;
 }
 
 .socials-row a {
-  color: black;
+  color: #1a1a1a;
   font-size: 1.8rem;
-  transition: transform 0.2s;
+  transition: transform 0.2s, color 0.2s;
 }
 
 .socials-row a:hover {
   transform: scale(1.2);
-  color: #ffdd57;
+  color: #276234;
 }
 
-/* Footer */
+/* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
 .footer {
   text-align: center;
   padding: 2rem;
   background: linear-gradient(90deg, #111, #333);
   color: white;
   margin-top: 2rem;
+  font-size: 0.9rem;
 }
 
-/* Responsive */
+/* ─────────────────────────────────────────
+   RESPONSIVE  (FIX #7 — mobile improvements)
+───────────────────────────────────────── */
 @media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+  }
+
+  nav {
+    justify-content: center;
+    gap: 0.1rem;
+  }
+
+  nav a {
+    font-size: 0.85rem;
+    margin-left: 0.4rem;
+  }
+
+  nav a.nav-cta {
+    margin-top: 0.25rem;
+  }
+
+  .hero {
+    min-height: unset;
+    padding: 3rem 1.5rem;
+  }
+
   .hero-content {
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
 
+  .hero-image {
+    flex: unset;
+  }
+
   .hero-image img {
-    width: 200px;
-    height: 200px;
+    width: 160px;
+    height: 160px;
   }
 
   .hero-text {
     max-width: 100%;
+    align-items: center;
+  }
+
+  .hero-text h2 {
+    font-size: 1.6rem;
+  }
+
+  .hero-cta-row {
+    justify-content: center;
   }
 
   .gallery {
@@ -246,8 +517,14 @@ margin-top: 5rem;
 
   .contact-row {
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
   }
-  
-}
 
+  .about h2,
+  .tour h2,
+  .journal h2,
+  .projects h2,
+  .contact-heading {
+    font-size: 1.6rem;
+  }
+}
